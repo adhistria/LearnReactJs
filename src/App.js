@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
 class App extends Component {
@@ -19,13 +19,26 @@ class App extends Component {
             ]}
         );
     };
-    nameChangedHandler = (event) =>{
-        this.setState({
-            persons:[
-                {name: event.target.value, age:"22"},
-                {name: "Mirah", age:"21"}
-            ]}
+    nameChangedHandler = (event,id) =>{
+        const personIndex = this.state.persons.findIndex(p =>
+            p.id ===  id
         );
+        const person = {
+            ...this.state.persons[personIndex]
+        };
+        person.name = event.target.value;
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        this.setState({
+            persons : persons
+        });
+        // this.state.persons[personIndex] = person;
+        // this.setState({
+        //     persons:[
+        //         {name: event.target.value, age:"22"},
+        //         {name: "Mirah", age:"21"}
+        //     ]}
+        // );
     };
     togglePersonHandler = () => {
         const doesShow = this.state.showPersons;
@@ -58,6 +71,7 @@ class App extends Component {
                         name = {person.name}
                         age = {person.age}
                         key = {person.id}
+                        changed = {(event) => this.nameChangedHandler(event,person.id)}
                     />
 
                     // </Person>
