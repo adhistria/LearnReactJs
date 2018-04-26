@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
+// import Radium from 'radium';
 import './App.css';
 import Person from './Person/Person';
+import Radium, {StyleRoot} from 'radium';
 class App extends Component {
     state = {
         persons:[
@@ -61,7 +63,11 @@ class App extends Component {
         color : 'white',
         font : 'inherit',
         border : '2px solid #aaa',
-        padding : '8px'
+        padding : '8px',
+        ':hover' : {
+            backgroundColor : 'lightgreen',
+            color : 'black'
+        }
     };
     let persons = null;
     if(this.state.showPersons){
@@ -94,6 +100,10 @@ class App extends Component {
             </div>
         );
         style.backgroundColor = 'red'
+        style[':hover'] = {
+            backgroundColor : "salmon",
+            color : "black"
+        }
     }
     const classess = [];
     if(this.state.persons.length <=2){
@@ -104,48 +114,50 @@ class App extends Component {
     }
     // let classess = ['red' , 'bold'].join(' ');
     return (
-      <div className="App">
-          <h1>Halo</h1>
-          <p className={classess.join(' ')}>Cobain aja euy</p>
-          {/*<button onClick={this.switchNameHandler.bind(this,'Adhi euy')}>Switch Name</button>*/}
-          {/*gunain bind dibandingkan fungsi di dalam onClick*/}
+        <StyleRoot>
+          <div className="App">
+              <h1>Halo</h1>
+              <p className={classess.join(' ')}>Cobain aja euy</p>
+              {/*<button onClick={this.switchNameHandler.bind(this,'Adhi euy')}>Switch Name</button>*/}
+              {/*gunain bind dibandingkan fungsi di dalam onClick*/}
 
-          {/*<button style =  {style} onClick={() => this.switchNameHandler('Maximilian')}>Switch Name</button>*/}
-          <button style =  {style} onClick={this.togglePersonHandler}>Toggle Persons</button>
-          {persons}
-          {/*{this.state.showPersons ?*/}
-              {/*<div>*/}
+              {/*<button style =  {style} onClick={() => this.switchNameHandler('Maximilian')}>Switch Name</button>*/}
+              <button style =  {style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+              {persons}
+              {/*{this.state.showPersons ?*/}
+                  {/*<div>*/}
+                  {/*<Person*/}
+                      {/*name={this.state.persons[0].name}*/}
+                      {/*age={this.state.persons[0].age}*/}
+                      {/*changed = {this.nameChangedHandler}*/}
+                  {/*>Coba euy*/}
+                  {/*</Person>*/}
+                  {/*<Person*/}
+                      {/*name={this.state.persons[1].name}*/}
+                      {/*age={this.state.persons[1].age}*/}
+                      {/*changed = {this.nameChangedHandler}*/}
+                  {/*>*/}
+                      {/*Coba euy*/}
+                  {/*</Person>*/}
+                  {/*</div>*/}
+                  {/*: null*/}
+              {/*}*/}
               {/*<Person*/}
+                  {/*changed = {this.nameChangedHandler}*/}
                   {/*name={this.state.persons[0].name}*/}
                   {/*age={this.state.persons[0].age}*/}
-                  {/*changed = {this.nameChangedHandler}*/}
-              {/*>Coba euy*/}
-              {/*</Person>*/}
+                  {/*click={this.switchNameHandler.bind(this,'COBA')}*/}
+              {/*/>*/}
               {/*<Person*/}
+                  {/*changed = {this.nameChangedHandler}*/}
                   {/*name={this.state.persons[1].name}*/}
                   {/*age={this.state.persons[1].age}*/}
-                  {/*changed = {this.nameChangedHandler}*/}
-              {/*>*/}
-                  {/*Coba euy*/}
-              {/*</Person>*/}
-              {/*</div>*/}
-              {/*: null*/}
-          {/*}*/}
-          {/*<Person*/}
-              {/*changed = {this.nameChangedHandler}*/}
-              {/*name={this.state.persons[0].name}*/}
-              {/*age={this.state.persons[0].age}*/}
-              {/*click={this.switchNameHandler.bind(this,'COBA')}*/}
-          {/*/>*/}
-          {/*<Person*/}
-              {/*changed = {this.nameChangedHandler}*/}
-              {/*name={this.state.persons[1].name}*/}
-              {/*age={this.state.persons[1].age}*/}
-              {/*click={this.switchNameHandler.bind(this,'COBA')}*/}
-          {/*/>*/}
-          {/*<Person name = "Tes" age="17" changed = {this.nameChangedHandler}/>*/}
-          {/*<Person/>*/}
-      </div>
+                  {/*click={this.switchNameHandler.bind(this,'COBA')}*/}
+              {/*/>*/}
+              {/*<Person name = "Tes" age="17" changed = {this.nameChangedHandler}/>*/}
+              {/*<Person/>*/}
+          </div>
+        </StyleRoot>
     );
     //   return(
     //       React.createElement("div", {className:"App"},React.createElement("h1",null,"halo"))
@@ -154,4 +166,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
