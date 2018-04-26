@@ -6,7 +6,8 @@ class App extends Component {
     state = {
         persons:[
             {id : "1", name: "Adhi", age:"22"},
-            {id : "2", name: "Mirah", age:"21"}
+            {id : "2", name: "Coba", age:"28"},
+            {id : "3", name: "Mirah", age:"21"}
         ],
         showPersons : false
     };
@@ -56,7 +57,8 @@ class App extends Component {
     };
   render() {
     const style = {
-        backgroudColor :'white',
+        backgroundColor :'green',
+        color : 'white',
         font : 'inherit',
         border : '2px solid #aaa',
         padding : '8px'
@@ -91,12 +93,20 @@ class App extends Component {
                 {/*</Person>*/}
             </div>
         );
-
-
+        style.backgroundColor = 'red'
     }
+    const classess = [];
+    if(this.state.persons.length <=2){
+        classess.push('red');
+    }
+    if(this.state.persons.length <=1){
+        classess.push('bold');
+    }
+    // let classess = ['red' , 'bold'].join(' ');
     return (
       <div className="App">
           <h1>Halo</h1>
+          <p className={classess.join(' ')}>Cobain aja euy</p>
           {/*<button onClick={this.switchNameHandler.bind(this,'Adhi euy')}>Switch Name</button>*/}
           {/*gunain bind dibandingkan fungsi di dalam onClick*/}
 
