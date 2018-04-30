@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import Radium from 'radium';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 import Radium, {StyleRoot} from 'radium';
 class App extends Component {
@@ -105,19 +105,19 @@ class App extends Component {
             color : "black"
         }
     }
-    const classess = [];
+    const assignedClasses = [];
     if(this.state.persons.length <=2){
-        classess.push('red');
+        assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <=1){
-        classess.push('bold');
+        assignedClasses.push(classes.bold);
     }
     // let classess = ['red' , 'bold'].join(' ');
     return (
         <StyleRoot>
-          <div className="App">
+          <div className={classes.App}>
               <h1>Halo</h1>
-              <p className={classess.join(' ')}>Cobain aja euy</p>
+              <p className={assignedClasses.join(' ')}>Cobain aja euy</p>
               {/*<button onClick={this.switchNameHandler.bind(this,'Adhi euy')}>Switch Name</button>*/}
               {/*gunain bind dibandingkan fungsi di dalam onClick*/}
 
