@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
+import Cockpit from '../Components/Cockpit/Cockpit';
 import classes from './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from '../Components/Persons/Persons';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 class App extends Component {
     state = {
         persons:[
@@ -58,37 +59,38 @@ class App extends Component {
     };
   render() {
     let persons = null;
-    let btnClass = '';
     if(this.state.showPersons){
         persons = (
-            <div>
-                {this.state.persons.map((person,index)=>{
-                    return <ErrorBoundary key = {person.id}>
-                    <Person
-                        click={() =>this.deletePersonHandler(index)}
-                        name = {person.name}
-                        age = {person.age}
-                        changed = {(event) => this.nameChangedHandler(event,person.id)}
-                    />
-                    </ErrorBoundary>
-                })}
-            </div>
+                <Persons
+                persons = {this.state.persons}
+                changed = {this.nameChangedHandler}
+                clicked = {this.deletePersonHandler}
+            />
         );
-        btnClass = classes.Red;
+
+        {/*ga pake error bounday lagi*/}
+                {/**/}
+                {/*{this.state.persons.map((person,index)=>{*/}
+                    {/*return <ErrorBoundary key = {person.id}>*/}
+                    {/*<Person*/}
+                        {/*click={() =>this.deletePersonHandler(index)}*/}
+                        {/*name = {person.name}*/}
+                        {/*age = {person.age}*/}
+                        {/*changed = {(event) => this.nameChangedHandler(event,person.id)}*/}
+                    {/*/>*/}
+                    {/*</ErrorBoundary>*/}
+                {/*})}*/}
     }
-    const assignedClasses = [];
-    if(this.state.persons.length <=2){
-        assignedClasses.push(classes.red);
-    }
-    if(this.state.persons.length <=1){
-        assignedClasses.push(classes.bold);
-    }
+
     // let classess = ['red' , 'bold'].join(' ');
     return (
           <div className={classes.App}>
-              <h1>Halo</h1>
-              <p className={assignedClasses.join(' ')}>Cobain aja euy</p>
-              <button className={btnClass} onClick={this.togglePersonHandler}>Toggle Persons</button>
+              <Cockpit
+                  appTitle = {this.props.title}
+                  showPersons = {this.state.showPersons}
+                  persons = {this.state.persons}
+                  clicked = {this.togglePersonHandler}
+              />
               {persons}
           </div>
     );
